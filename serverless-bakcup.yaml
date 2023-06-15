@@ -1,0 +1,28 @@
+service: lambda-webhook
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: us-east-1
+  environment:
+    TWILIO_AUTH_TOKEN: 0444a1ca0b4b49d6dff3ef85e5be358c
+
+
+plugins:
+  - serverless-wsgi
+  - serverless-python-requirements
+
+functions:
+  index:
+    handler: app.index
+    url: true
+  token:
+    handler: app.token
+    url: true
+  voice:
+    handler: app.voice
+    url: true
+
+custom:
+  pythonRequirements:
+    pythonBin: python3

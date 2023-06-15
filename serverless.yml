@@ -1,0 +1,45 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: twilio-test
+plugins:
+  - serverless-wsgi
+  - serverless-python-requirements
+custom:
+  wsgi:
+    app: app.app
+  pythonRequirements:
+    virtualenv: .
+provider:
+  name: aws
+  region: us-east-1
+  runtime: python3.8
+functions:
+  index:
+    handler: wsgi_handler.handler
+    events:
+      - http:
+          path: /
+          method: GET
+  token:
+    handler: wsgi_handler.handler
+    events:
+      - http:
+          path: /token
+          method: GET
+  voice:
+    handler: wsgi_handler.handler
+    events:
+      - http:
+          path: /voice
+          method: POST
